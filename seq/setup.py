@@ -4,7 +4,7 @@ setup(
     version='0.0.1',
     entry_points={
         'console_scripts': [
-            'pyseq=seq:play'
+            'pyseq=main:play'
         ]
     }
 )

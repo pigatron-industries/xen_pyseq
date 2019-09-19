@@ -1,3 +1,3 @@
 
 print("test score")
-test()
+noteOn(0, 60, 127)
