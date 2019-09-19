@@ -1,6 +1,8 @@
 import mido
+from util import *
 
 class Sequencer():
 
-    def __init__(self):
-        self.outport = 0 #mido.open_output()
+    def __init__(self, config):
+        self.config = config
+        self.outport = mido.open_output(name='foo', virtual=toBoolean(config['Output']['virtual']))
