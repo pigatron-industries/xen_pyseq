@@ -9,7 +9,9 @@ seq = sequencer.Sequencer(config)
 
 # Console command to play a file
 def play():
+    seq.start()
     exec(open(sys.argv[1]).read())
+    seq.stop()
 
 
 def noteOn(channel, note, velocity):
