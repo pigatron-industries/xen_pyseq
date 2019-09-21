@@ -15,5 +15,7 @@ def play():
 
 
 def noteOn(channel, note, velocity):
-    msg = mido.Message('note_on', channel=channel, note=note, velocity=velocity)
-    seq.noteOn(msg)
+    seq.noteOn(channel, note, velocity)
+
+def noteOff(channel, note):
+    seq.noteOff(channel, note)

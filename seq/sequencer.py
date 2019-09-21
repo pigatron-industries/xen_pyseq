@@ -26,7 +26,13 @@ class Sequencer():
         self.outport.close();
 
 
-    def noteOn(self, msg):
-        print("noteOn")
-        print(msg.bytes())
+    def noteOn(self, channel, note, velocity):
+        msg = mido.Message('note_on', channel=channel, note=note, velocity=velocity)
+        print("noteOn {0}".format(msg.bytes()))
+        self.outport.send(msg)
+
+
+    def noteOff(self, channel, note):
+        msg = mido.Message('note_off', channel=channel, note=note, velocity=0)
+        print("noteOff {0}".format(msg.bytes()))
         self.outport.send(msg)
