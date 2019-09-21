@@ -10,3 +10,4 @@ class Sequencer():
 
     def noteOn(msg):
         print(msg.bytes())
+        outport.send(msg)

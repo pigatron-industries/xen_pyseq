@@ -4,7 +4,7 @@
 
 pip3 install -r requirements.txt
 
-pip3 install -e ./seq
+sudo -H pip3 install -e ./seq
 
 ## Run
 
