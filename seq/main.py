@@ -1,14 +1,10 @@
-#from bootstrap import *
 import sys
 import mido
-import configparser
+import config
 import sequencer
 
-
-config = configparser.ConfigParser()
-config.read('config.ini')
+config = config.Config('config.ini')
 seq = sequencer.Sequencer(config)
-
 
 
 # Console command to play a file

@@ -1,5 +1,5 @@
 import mido
-from util import *
+import config
 
 class Sequencer():
 
@@ -7,7 +7,7 @@ class Sequencer():
         print("Sequencer::init")
         self.config = config
         try:
-            self.outport = mido.open_output(name=config['Output']['port'], virtual=toBoolean(config['Output']['virtual']))
+            self.outport = mido.open_output(name=self.config.getStringConfig('Output', 'port', 'virtual'), virtual=self.config.getBooleanConfig('Output', 'virtual', True))
         except OSError as err:
             print("Error creating outport: {0}".format(err))
             print("Please configure port name in config.ini, possible port names are:")
