@@ -3,10 +3,16 @@ print("========================")
 print(" Starting Test Sequence")
 print("========================")
 
+# TODO Note Names
+A_0 = 21
+AS0 = 22
+B_0 = 23
 
-noteOn(0, 60, 127)
+channel = 0
+
+noteOn(channel, 60, 127)
 #wait(1)
-noteOff(0, 60)
+noteOff(channel, 60)
 
 
 print("======================")
