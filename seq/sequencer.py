@@ -4,6 +4,7 @@ import time
 import concurrent.futures
 import logging
 import clock
+from constants import *
 
 defaultPortName = 'virtual'
 
@@ -17,6 +18,7 @@ class Sequencer():
     def __init__(self, config):
         self.config = config
         self.executor = concurrent.futures.ThreadPoolExecutor(max_workers=20)
+        self.noteLength = DEFAULT_NOTE_LENGTH
 
 
     def start(self):
@@ -45,7 +47,7 @@ class Sequencer():
 
     def startClock(self):
         self.clock = clock.Clock(self)
-        clockFuture = self.executor.submit(self.clock.startInternal)
+        self.run(self.clock.startInternal)
 
 
     def setBpm(self, bpm):
@@ -59,6 +61,10 @@ class Sequencer():
 
     def wait(self, length):
         self.clock.wait(length)
+
+
+    def run(self, function, *args):
+        self.executor.submit(function, *args)
 
 
     #####################
@@ -75,4 +81,3 @@ class Sequencer():
         msg = mido.Message('note_off', channel=channel, note=note, velocity=0)
         logging.info("noteOff {0}".format(msg.bytes()))
         self.outport.send(msg)
-        
