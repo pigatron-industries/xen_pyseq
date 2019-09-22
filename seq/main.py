@@ -16,6 +16,14 @@ def play():
     seq.stop()
 
 
+def setBpm(bpm):
+    seq.setBpm(bpm)
+
+
+def wait(length):
+    seq.wait(length)
+
+
 def noteOn(channel, note, velocity):
     seq.noteOn(channel, note, velocity)
 
