@@ -10,14 +10,14 @@ class Clock():
 
 
     def __init__(self, sequencer):
-        self.time = 0
+        self.tick = 0
         self.running = True
         self.seq = sequencer
         self.setBpm(defaultBpm)
 
 
     def setBpm(self, bpm):
-        logging.info("Clock::setBpm {0}".format(bpm))
+        logging.debug("Clock::setBpm {0}".format(bpm))
         self.bpm = bpm
         self.interval = 60/bpm/ticksPerBeat
 
@@ -27,8 +27,8 @@ class Clock():
 
 
     def wait(self, length):
-        waitUntilTime = self.time + length
-        while self.running and self.time < waitUntilTime:
+        waitUntilTime = self.tick + length
+        while self.running and self.tick < waitUntilTime:
             pass
 
 
@@ -38,15 +38,15 @@ class Clock():
     #########################
 
     def startInternal(self):
-        self.time = 0
+        self.tick = 0
         try:
             while self.running:
                 self.internalClockLoop()
         except Exception as e:
-            logger.error("Unexpected error: {0}".format(e))
+            logging.error("Unexpected error: {0}".format(e))
 
 
     def internalClockLoop(self):
         time.sleep(self.interval)
-        self.time = self.time + 1
+        self.tick = self.tick + 1
         self.seq.sendClock()

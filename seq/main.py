@@ -5,7 +5,7 @@ import logging
 import sequencer
 from constants import *
 
-logging.basicConfig(format="%(message)s", level=logging.INFO, datefmt="%H:%M:%S")
+logging.basicConfig(format="%(asctime)s.%(msecs)03d %(message)s", level=logging.DEBUG, datefmt="%H:%M:%S")
 config = config.Config('config.ini')
 seq = sequencer.Sequencer(config)
 NOTE_LENGTH = L4
@@ -16,6 +16,7 @@ def play():
     seq.start()
     exec(open(sys.argv[1]).read())
     seq.stop()
+
 
 #################
 # Set variables #
@@ -34,24 +35,20 @@ def wait(length):
     seq.wait(length)
 
 
-def noteOn(channel, note, velocity=DEFAULT_VELOCITY):
-    seq.noteOn(channel, note, velocity)
+def noteOn(channel, note, velocity=DEFAULT_VELOCITY, start=0):
+    seq.noteOn(channel, note, velocity, start)
 
 
-def noteOff(channel, note):
-    seq.noteOff(channel, note)
+def noteOff(channel, note, start=0):
+    seq.noteOff(channel, note, start)
 
 
-def waitNoteOff(channel, note, velocity, length):
-    wait(length)
-    noteOff(channel, note)
-
-# Asynchronus not on then note off after length of time
+# note on then note off after length of time
 def note(channel, note, velocity=DEFAULT_VELOCITY, length=0):
     if length == 0:
         length = seq.noteLength
     noteOn(channel, note, velocity)
-    seq.run(waitNoteOff, channel, note, velocity, length)
+    noteOff(channel, note, length)
 
 
 #TODO
