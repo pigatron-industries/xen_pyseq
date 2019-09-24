@@ -24,3 +24,18 @@ class Clock():
 
     def stop(self):
         self.running = False
+
+
+    def tickLoop(self):
+        self.time = 0
+        try:
+            while self.running:
+                self.tick()
+        except Exception as e:
+            logger.error("Unexpected error: {0}".format(e))
+
+
+    def tick(self):
+        time.sleep(self.interval)
+        self.time = self.time + 1
+        self.seq.tick()

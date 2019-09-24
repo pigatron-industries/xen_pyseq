@@ -27,7 +27,7 @@ class Sequencer():
         try:
             self.outport = mido.open_output(name=self.config.getStringConfig('Output', 'port', defaultPortName), virtual=self.config.getBooleanConfig('Output', 'virtual', True))
             time.sleep(0.5) #Wait some time for port to open
-            self.startSequencing()
+            self.startClock()
         except OSError as e:
             print("Error creating outport: {0}".format(e))
             print("Please configure port name in config.ini, possible port names are:")
@@ -46,32 +46,18 @@ class Sequencer():
     # Sequencer thread #
     ####################
 
-    def startSequencing(self):
+    def startClock(self):
         self.clock = clock.Clock(self)
-        self.run(self.startInternal)
+        self.run(self.clock.tickLoop)
 
 
     def run(self, function, *args):
         self.executor.submit(function, *args)
 
 
-    def startInternal(self):
-        self.clock.time = 0
-        try:
-            while self.clock.running:
-                self.tick()
-        except Exception as e:
-            logger.error("Unexpected error: {0}".format(e))
-
-
     def tick(self):
-        time.sleep(self.clock.interval)
-        self.clock.time = self.clock.time + 1
         self.sendClock()
-
-
-
-
+        
 
     ####################
     # Timing Functions #
@@ -83,6 +69,7 @@ class Sequencer():
 
 
     def sendClock(self):
+        print("here")
         msg = mido.Message('clock')
         self.outport.send(msg)
 
