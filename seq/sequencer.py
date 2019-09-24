@@ -108,3 +108,8 @@ class Sequencer():
     def noteOff(self, channel, note, start=0):
         msg = mido.Message('note_off', channel=channel, note=note, velocity=0, time=self.clock.time+start)
         self.queueMessage(self.clock.time + start, msg)
+
+
+    def pitch(channel, pitch):
+        msg = mido.Message('pitchwheel', channel=channel, pitch=pitch)
+        self.queueMessage(self.clock.time + start, msg)

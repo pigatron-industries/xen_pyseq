@@ -50,6 +50,10 @@ def note(channel, note, velocity=DEFAULT_VELOCITY, start=0, length=0):
     noteOff(channel, note, start+length)
 
 
+def pitch(channel, pitch):
+    seq.pitch(channel, pitch)
+    
+
 #TODO
 
 # Floating point note values which automatically send pitch bend message with note_on
