@@ -57,12 +57,11 @@ class Sequencer():
 
     def tick(self):
         self.sendClock()
-        
+
 
     ####################
     # Timing Functions #
     ####################
-
 
     def setBpm(self, bpm):
         self.clock.setBpm(bpm)
