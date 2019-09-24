@@ -5,7 +5,7 @@ import logging
 import sequencer
 from constants import *
 
-logging.basicConfig(format="%(message)s", level=logging.INFO, datefmt="%H:%M:%S")
+logging.basicConfig(format="%(message)s", level=logging.DEBUG, datefmt="%H:%M:%S")
 config = config.Config('config.ini')
 seq = sequencer.Sequencer(config)
 NOTE_LENGTH = L4

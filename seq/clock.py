@@ -37,5 +37,5 @@ class Clock():
 
     def tick(self):
         time.sleep(self.interval)
-        self.time = self.time + 1
         self.seq.tick()
+        self.time = self.time + 1
