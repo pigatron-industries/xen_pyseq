@@ -65,7 +65,7 @@ def pitchBend(bend, start=0, channel=-1):
 
 #TODO
 
-# default channel number + rotating channel number
+# fix channel rotation for note off messages
 
 #def noteOn(channel, note, velocity, length):
 #   NoteOn with time length until note off is triggered
