@@ -5,30 +5,30 @@ print("========================")
 
 setBpm(120)
 setNoteLength(L4)
-setChannel(0, 3)
+setChannel(0)
 
-noteOn(60, channel=0)
+noteOn(60)
 wait(L4)
 
-noteOn(60.5, channel=1)
+noteOn(60.5)
 wait(L4)
 
-noteOn(61, channel=2)
+noteOn(61)
 wait(L4)
 
-noteOn(61.5, channel=3)
+noteOn(61.5)
 wait(L4)
 
-noteOn(62, channel=0)
+noteOn(62)
 wait(L4)
 
-noteOn(62.5, channel=1)
+noteOn(62.5)
 wait(L4)
 
-noteOn(63, channel=2)
+noteOn(63)
 wait(L4)
 
-noteOn(63.5, channel=3)
+noteOn(63.5)
 wait(L4)
 
 wait(L4)
