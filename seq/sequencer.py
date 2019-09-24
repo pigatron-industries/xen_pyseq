@@ -110,6 +110,6 @@ class Sequencer():
         self.queueMessage(self.clock.time + start, msg)
 
 
-    def pitchBend(self, channel, pitch, start=0):
-        msg = mido.Message('pitchwheel', channel=channel, pitch=int(pitch))
+    def pitchBend(self, channel, bend, start=0):
+        msg = mido.Message('pitchwheel', channel=channel, pitch=int(bend))
         self.queueMessage(self.clock.time + start, msg)

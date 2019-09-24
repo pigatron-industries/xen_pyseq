@@ -34,12 +34,17 @@ def wait(length):
     seq.wait(length)
 
 
+# Note on.
+# Note number can be float to introduce pitch bend.
 def noteOn(channel, note, velocity=DEFAULT_VELOCITY, start=0):
-    seq.noteOn(channel, note, velocity, start)
+    bend = note - int(note)
+    if bend > 0:
+        pitchBend(channel, bend, start)
+    seq.noteOn(channel, int(note), velocity, start)
 
 
 def noteOff(channel, note, start=0):
-    seq.noteOff(channel, note, start)
+    seq.noteOff(channel, int(note), start)
 
 
 # note on then note off after length of time
@@ -51,8 +56,8 @@ def note(channel, note, velocity=DEFAULT_VELOCITY, start=0, length=0):
 
 
 # pitch bend in cents. floating point in range from -2 to 2
-def pitchBend(channel, pitch, start=0):
-    seq.pitchBend(channel, pitch * 4096, start)
+def pitchBend(channel, bend, start=0):
+    seq.pitchBend(channel, bend * 4096, start)
 
 
 #TODO
