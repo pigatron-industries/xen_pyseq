@@ -20,6 +20,9 @@ class Sequencer():
         self.executor = concurrent.futures.ThreadPoolExecutor(max_workers=20)
         self.noteLength = DEFAULT_NOTE_LENGTH
         self.messageQueue = []
+        self.channelFrom = 0
+        self.channelTo = 0
+        self.channel = 0;
 
 
     def start(self):
@@ -96,20 +99,48 @@ class Sequencer():
             pass
 
 
+    ####################
+    # Channel Rotation #
+    ####################
+
+    def setChannel(self, channelFrom, channelTo=-1):
+        self.channel = channelFrom
+        self.channelFrom = channelFrom
+        if channelTo == -1:
+            channelTo = channelFrom
+        else:
+            self.channelTo = channelTo
+
+
+    def getChannel(self):
+        returnChannel = self.channel
+        if self.channel < self.channelTo:
+            self.channel = self.channel + 1
+        elif self.channel == self.channelTo:
+            self.channel = self.channelFrom
+        return returnChannel
+
+
     #####################
     # Control Functions #
     #####################
 
-    def noteOn(self, channel, note, velocity, start=0):
+    def noteOn(self, note, velocity, start=0, channel=-1):
+        if channel == -1:
+            channel = self.getChannel()
         msg = mido.Message('note_on', channel=channel, note=note, velocity=velocity, time=self.clock.time+start)
         self.queueMessage(self.clock.time + start, msg)
 
 
-    def noteOff(self, channel, note, start=0):
+    def noteOff(self, note, start=0, channel=-1):
+        if channel == -1:
+            channel = self.getChannel()
         msg = mido.Message('note_off', channel=channel, note=note, velocity=0, time=self.clock.time+start)
         self.queueMessage(self.clock.time + start, msg)
 
 
-    def pitchBend(self, channel, bend, start=0):
+    def pitchBend(self, bend, start=0, channel=-1):
+        if channel == -1:
+            channel = self.getChannel()
         msg = mido.Message('pitchwheel', channel=channel, pitch=int(bend))
         self.queueMessage(self.clock.time + start, msg)

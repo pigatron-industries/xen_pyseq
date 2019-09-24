@@ -3,36 +3,35 @@ print("========================")
 print(" Starting Test Sequence")
 print("========================")
 
-channel = 0
-
 setBpm(120)
 setNoteLength(L8)
+setChannel(0)
 
-noteOn(channel, 60)
-noteOn(channel, 62)
-noteOn(channel, 64)
-noteOn(channel, 65)
-
-wait(L4)
-
-noteOff(channel, 60)
-noteOff(channel, 62)
-noteOff(channel, 64)
-noteOff(channel, 65)
+noteOn(60)
+noteOn(62)
+noteOn(64)
+noteOn(65)
 
 wait(L4)
 
-note(channel, 60)
-note(channel, 62)
-note(channel, 64)
-note(channel, 65)
+noteOff(60)
+noteOff(62)
+noteOff(64)
+noteOff(65)
 
 wait(L4)
 
-note(channel, 62)
-note(channel, 64)
-note(channel, 66)
-note(channel, 68)
+note(60)
+note(62)
+note(64)
+note(65)
+
+wait(L4)
+
+note(62)
+note(64)
+note(66)
+note(68)
 
 wait(L4)
 

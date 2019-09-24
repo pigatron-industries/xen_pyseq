@@ -26,6 +26,9 @@ def setBpm(bpm):
 def setNoteLength(length):
     seq.noteLength = length
 
+def setChannel(channelFrom, channelTo=-1):
+    seq.setChannel(channelFrom, channelTo)
+
 
 #################
 # Note Commands #
@@ -36,33 +39,33 @@ def wait(length):
 
 # Note on.
 # Note number can be float to introduce pitch bend.
-def noteOn(channel, note, velocity=DEFAULT_VELOCITY, start=0):
+def noteOn(note, velocity=DEFAULT_VELOCITY, start=0, channel=-1):
     bend = note - int(note)
     if bend > 0:
         pitchBend(channel, bend, start)
-    seq.noteOn(channel, int(note), velocity, start)
+    seq.noteOn(int(note), velocity, start, channel)
 
 
-def noteOff(channel, note, start=0):
-    seq.noteOff(channel, int(note), start)
+def noteOff(note, start=0, channel=-1, ):
+    seq.noteOff(int(note), start, channel)
 
 
 # note on then note off after length of time
-def note(channel, note, velocity=DEFAULT_VELOCITY, start=0, length=0):
+def note(note, velocity=DEFAULT_VELOCITY, length=0, start=0, channel=-1):
     if length == 0:
         length = seq.noteLength
-    noteOn(channel, note, velocity, start)
-    noteOff(channel, note, start+length)
+    noteOn(note, velocity, start, channel)
+    noteOff(note, start+length, channel)
 
 
 # pitch bend in cents. floating point in range from -2 to 2
-def pitchBend(channel, bend, start=0):
-    seq.pitchBend(channel, bend * 4096, start)
+def pitchBend(bend, start=0, channel=-1):
+    seq.pitchBend(bend * 4096, start, channel)
 
 
 #TODO
 
-# Floating point note values which automatically send pitch bend message with note_on
+# default channel number + rotating channel number
 
 #def noteOn(channel, note, velocity, length):
 #   NoteOn with time length until note off is triggered
