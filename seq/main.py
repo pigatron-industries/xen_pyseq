@@ -50,9 +50,10 @@ def note(channel, note, velocity=DEFAULT_VELOCITY, start=0, length=0):
     noteOff(channel, note, start+length)
 
 
-def pitch(channel, pitch):
-    seq.pitch(channel, pitch)
-    
+# pitch bend in cents. floating point in range from -2 to 2
+def pitchBend(channel, pitch, start=0):
+    seq.pitchBend(channel, pitch * 4096, start)
+
 
 #TODO
 
