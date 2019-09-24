@@ -32,7 +32,7 @@ class Clock():
             while self.running:
                 self.tick()
         except Exception as e:
-            logger.error("Unexpected error: {0}".format(e))
+            logging.error("Unexpected error: {0}".format(e))
 
 
     def tick(self):

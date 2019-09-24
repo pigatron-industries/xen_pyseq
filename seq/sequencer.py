@@ -57,6 +57,7 @@ class Sequencer():
 
     def tick(self):
         self.sendClock()
+        self.sendQueuedMessages()
 
 
     def queueMessage(self, tick, msg):
@@ -67,10 +68,10 @@ class Sequencer():
 
 
     def sendQueuedMessages(self):
-        print(self.clock.tick)
-        messages = self.messageQueue[self.clock.tick]
-        for message in messages:
-            self.outport.send(message)
+        if len(self.messageQueue) > self.clock.time+1:
+            messages = self.messageQueue[self.clock.time]
+            for message in messages:
+                self.outport.send(message)
 
 
 
@@ -91,7 +92,6 @@ class Sequencer():
         waitUntilTime = self.clock.time + length
         while self.clock.running and self.clock.time < waitUntilTime:
             pass
-
 
 
     #####################
