@@ -69,11 +69,12 @@ class Sequencer():
 
     def sendQueuedMessages(self):
         if len(self.messageQueue) >= self.clock.time+1:
-            logging.debug("Time = {}".format(self.clock.time))
             messages = self.messageQueue[self.clock.time]
-            for message in messages:
-                logging.debug(message)
-                self.outport.send(message)
+            if len(messages) > 0:
+                logging.debug("Time = {}".format(self.clock.time))
+                for message in messages:
+                    logging.debug(message)
+                    self.outport.send(message)
 
 
 
@@ -103,12 +104,8 @@ class Sequencer():
     def noteOn(self, channel, note, velocity, start=0):
         msg = mido.Message('note_on', channel=channel, note=note, velocity=velocity)
         self.queueMessage(self.clock.time + start, msg)
-        #logging.info("noteOn {0}".format(msg.bytes()))
-        #self.outport.send(msg)
 
 
     def noteOff(self, channel, note, start=0):
         msg = mido.Message('note_off', channel=channel, note=note, velocity=0)
         self.queueMessage(self.clock.time + start, msg)
-        #logging.info("noteOff {0}".format(msg.bytes()))
-        #self.outport.send(msg)
