@@ -77,7 +77,6 @@ class Sequencer():
                     self.outport.send(message)
 
 
-
     ####################
     # Timing Functions #
     ####################
@@ -87,7 +86,7 @@ class Sequencer():
 
 
     def sendClock(self):
-        msg = mido.Message('clock')
+        msg = mido.Message('clock', time=self.clock.time)
         self.outport.send(msg)
 
 
@@ -102,10 +101,10 @@ class Sequencer():
     #####################
 
     def noteOn(self, channel, note, velocity, start=0):
-        msg = mido.Message('note_on', channel=channel, note=note, velocity=velocity)
+        msg = mido.Message('note_on', channel=channel, note=note, velocity=velocity, time=self.clock.time+start)
         self.queueMessage(self.clock.time + start, msg)
 
 
     def noteOff(self, channel, note, start=0):
-        msg = mido.Message('note_off', channel=channel, note=note, velocity=0)
+        msg = mido.Message('note_off', channel=channel, note=note, velocity=0, time=self.clock.time+start)
         self.queueMessage(self.clock.time + start, msg)
