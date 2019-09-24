@@ -43,6 +43,8 @@ def noteOn(note, velocity=DEFAULT_VELOCITY, start=0, channel=-1):
     bend = note - int(note)
     if bend > 0:
         pitchBend(bend, start, channel)
+    else:
+        pitchBend(0, start, channel)
     seq.noteOn(int(note), velocity, start, channel)
 
 
