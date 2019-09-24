@@ -59,6 +59,21 @@ class Sequencer():
         self.sendClock()
 
 
+    def queueMessage(self, tick, msg):
+        while len(self.messageQueue) < tick+1:
+            self.messageQueue.append({})
+            self.messageQueue[len(self.messageQueue)-1] = []
+        self.messageQueue[int(tick)].append(msg)
+
+
+    def sendQueuedMessages(self):
+        print(self.clock.tick)
+        messages = self.messageQueue[self.clock.tick]
+        for message in messages:
+            self.outport.send(message)
+
+
+
     ####################
     # Timing Functions #
     ####################
@@ -68,7 +83,6 @@ class Sequencer():
 
 
     def sendClock(self):
-        print("here")
         msg = mido.Message('clock')
         self.outport.send(msg)
 
