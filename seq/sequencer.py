@@ -1,7 +1,6 @@
 import mido
 import config
 import time
-import threading
 import concurrent.futures
 import logging
 import clock

@@ -5,7 +5,7 @@ print("========================")
 
 setBpm(120)
 setNoteLength(L8)
-setChannel(0)
+setChannel(0, 1)
 
 noteOn(60)
 noteOn(62)
