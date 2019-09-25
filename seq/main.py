@@ -102,15 +102,6 @@ def pitchBend(bend, start=0, channel=-1):
 
 #TODO
 
-#def noteOn(channel, note, velocity, length):
-#   NoteOn with time length until note off is triggered
-
-#def wait(length)
-#   wait some time based on clock
-
-#def pitchBend():
-#   send pitch bend message
-
 #def pressure():
 #   set pressure control
 
