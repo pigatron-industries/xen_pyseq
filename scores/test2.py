@@ -5,7 +5,7 @@ print("========================")
 
 setBpm(120)
 setNoteLength(L4)
-setChannel(0)
+setChannel(0, 4)
 
 noteOn(60)
 wait(L4)

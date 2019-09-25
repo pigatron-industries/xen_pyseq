@@ -2,6 +2,7 @@ import sys
 import mido
 import config
 import logging
+import threading
 import sequencer
 from constants import *
 
@@ -26,8 +27,34 @@ def setBpm(bpm):
 def setNoteLength(length):
     seq.noteLength = length
 
+####################
+# Channel Rotation #
+####################
+
 def setChannel(channelFrom, channelTo=-1):
-    seq.setChannel(channelFrom, channelTo)
+    currentThread = threading.current_thread()
+    dictionary = currentThread.__dict__
+
+    dictionary["channel"] = channelFrom
+    dictionary["channelFrom"] = channelFrom
+    if channelTo == -1:
+        dictionary["channelTo"] = channelFrom
+    else:
+        dictionary["channelTo"] = channelTo
+
+
+def getChannel():
+    currentThread = threading.current_thread()
+    dictionary = currentThread.__dict__
+
+    channel = dictionary["channel"]
+    channelTo = dictionary["channelTo"]
+    channelFrom = dictionary["channelFrom"]
+    if channel < channelTo:
+        dictionary["channel"] = channel + 1
+    elif channel == channelTo:
+        dictionary["channel"] = channelFrom
+    return channel
 
 
 #################
@@ -40,6 +67,8 @@ def wait(length):
 # Note on.
 # Note number can be float to introduce pitch bend.
 def noteOn(note, velocity=DEFAULT_VELOCITY, start=0, channel=-1):
+    if channel == -1:
+        channel = getChannel()
     bend = note - int(note)
     if bend > 0:
         pitchBend(bend, start, channel)
@@ -48,12 +77,16 @@ def noteOn(note, velocity=DEFAULT_VELOCITY, start=0, channel=-1):
     seq.noteOn(int(note), velocity, start, channel)
 
 
-def noteOff(note, start=0, channel=-1, ):
+def noteOff(note, start=0, channel=-1):
+    if channel == -1:
+        channel = getChannel()
     seq.noteOff(int(note), start, channel)
 
 
 # note on then note off after length of time
 def note(note, velocity=DEFAULT_VELOCITY, length=0, start=0, channel=-1):
+    if channel == -1:
+        channel = getChannel()
     if length == 0:
         length = seq.noteLength
     noteOn(note, velocity, start, channel)
@@ -62,6 +95,8 @@ def note(note, velocity=DEFAULT_VELOCITY, length=0, start=0, channel=-1):
 
 # pitch bend in cents. floating point in range from -2 to 2
 def pitchBend(bend, start=0, channel=-1):
+    if channel == -1:
+        channel = getChannel()
     seq.pitchBend(bend * 4096, start, channel)
 
 
