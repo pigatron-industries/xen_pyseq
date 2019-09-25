@@ -1,3 +1,4 @@
+import scales.eq12
 
 print("========================")
 print(" Starting Test Sequence")

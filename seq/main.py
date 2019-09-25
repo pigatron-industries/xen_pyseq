@@ -1,4 +1,5 @@
 import sys
+import os
 import mido
 import config
 import logging
@@ -6,10 +7,24 @@ import threading
 import sequencer
 from constants import *
 
+
+path = os.path.abspath(os.path.dirname(__file__))
+
+# Load config
+configfile = os.path.join(path, "../config.ini")
+config = config.Config(configfile)
+
+# Set root folder as search path for modules
+root = os.path.join(path, "..")
+sys.path.append(root)
+
+# Setup logging
 logging.basicConfig(format="%(message)s", level=logging.DEBUG, datefmt="%H:%M:%S")
-config = config.Config('config.ini')
+
+# Create sequencer
 seq = sequencer.Sequencer(config)
 NOTE_LENGTH = L4
+
 
 
 # Console command to play a file
