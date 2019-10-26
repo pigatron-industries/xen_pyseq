@@ -1,15 +1,15 @@
-import protobuf.ChannelConfig_pb2 as channelConfig
+import protobuf.ConfigMessage_pb2 as configMessage
 
-config = channelConfig.ChannelConfig()
-channelMapping = config.channelMapping.add()
+message = configMessage.WrapperMessage()
+channelMapping = message.channelConfig.channelMapping.add()
 channelMapping.midiChannel = 1
 channelMapping.cvChannelFrom = 1
 channelMapping.cvChannelTo = 1
-channelMapping = config.channelMapping.add()
+channelMapping = message.channelConfig.channelMapping.add()
 channelMapping.midiChannel = 2
 channelMapping.cvChannelFrom = 2
 channelMapping.cvChannelTo = 2
-logging.info(config.SerializeToString())
+logging.info(message.SerializeToString())
 
-sysex(config.SerializeToString())
+sysex(message.SerializeToString())
 wait(L4)

@@ -11,3 +11,7 @@ message ChannelMapping {
 message ChannelConfig {
     repeated ChannelMapping channelMapping = 1;
 }
+
+message WrapperMessage {
+    optional ChannelConfig channelConfig = 1;
+}
