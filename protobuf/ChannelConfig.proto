@@ -1,0 +1,13 @@
+syntax = "proto2";
+
+package pigatron;
+
+message ChannelMapping {
+    required int32 midiChannel = 1;
+    required int32 cvChannelFrom = 2;
+    required int32 cvChannelTo = 3;
+}
+
+message ChannelConfig {
+    repeated ChannelMapping channelMapping = 1;
+}
