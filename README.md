@@ -8,4 +8,4 @@ sudo -H pip3 install -e ./seq
 
 ## Run
 
-pyseq scores/test.py
+pyseq scores/test1.py

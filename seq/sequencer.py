@@ -4,6 +4,7 @@ import time
 import concurrent.futures
 import logging
 import clock
+import base64
 from constants import *
 
 defaultPortName = 'virtual'
@@ -116,3 +117,15 @@ class Sequencer():
     def pitchBend(self, bend, start=0, channel=0):
         msg = mido.Message('pitchwheel', channel=channel, pitch=int(bend))
         self.queueMessage(self.clock.time + start, msg)
+
+
+    #####################
+    #  Sysex Functions  #
+    #####################
+
+    def sysex(self, data):
+        logging.info("Sequencer::sysex")
+        encodedBytes = base64.b64encode(data)
+        msg = mido.Message('sysex', data=encodedBytes)
+        self.queueMessage(self.clock.time, msg)
+        logging.info("encoded data = {0}".format(str(encodedBytes, "utf-8")))

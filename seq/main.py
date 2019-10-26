@@ -115,6 +115,9 @@ def pitchBend(bend, start=0, channel=-1):
     seq.pitchBend(bend * 4096, start, channel)
 
 
+def sysex(data):
+    seq.sysex(data)
+
 #TODO
 
 #def pressure():
