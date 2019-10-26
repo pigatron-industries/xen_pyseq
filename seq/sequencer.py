@@ -78,6 +78,7 @@ class Sequencer():
                 logging.debug("Time = {}".format(self.clock.time))
                 for message in messages:
                     logging.debug(message)
+                    logging.debug(message.hex())
                     self.outport.send(message)
 
 
