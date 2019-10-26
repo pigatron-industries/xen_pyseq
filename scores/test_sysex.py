@@ -1,4 +1,4 @@
 
 
-sysex("Hello World!".encode("utf-8"));
+sysex(bytearray([1, 2, 3]))
 wait(L4)
