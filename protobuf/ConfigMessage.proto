@@ -1,6 +1,6 @@
 syntax = "proto2";
 
-package pigatron;
+package xen;
 
 message ChannelMapping {
     required int32 midiChannel = 1;
@@ -12,6 +12,6 @@ message ChannelConfig {
     repeated ChannelMapping channelMapping = 1;
 }
 
-message WrapperMessage {
+message ConfigWrapper {
     optional ChannelConfig channelConfig = 1;
 }

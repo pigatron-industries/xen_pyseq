@@ -1,6 +1,6 @@
 import protobuf.ConfigMessage_pb2 as configMessage
 
-message = configMessage.WrapperMessage()
+message = configMessage.ConfigWrapper()
 channelMapping = message.channelConfig.channelMapping.add()
 channelMapping.midiChannel = 1
 channelMapping.cvChannelFrom = 1

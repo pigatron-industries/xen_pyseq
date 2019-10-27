@@ -17,10 +17,10 @@ _sym_db = _symbol_database.Default()
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='ConfigMessage.proto',
-  package='pigatron',
+  package='xen',
   syntax='proto2',
   serialized_options=None,
-  serialized_pb=_b('\n\x13\x43onfigMessage.proto\x12\x08pigatron\"Q\n\x0e\x43hannelMapping\x12\x13\n\x0bmidiChannel\x18\x01 \x02(\x05\x12\x15\n\rcvChannelFrom\x18\x02 \x02(\x05\x12\x13\n\x0b\x63vChannelTo\x18\x03 \x02(\x05\"A\n\rChannelConfig\x12\x30\n\x0e\x63hannelMapping\x18\x01 \x03(\x0b\x32\x18.pigatron.ChannelMapping\"@\n\x0eWrapperMessage\x12.\n\rchannelConfig\x18\x01 \x01(\x0b\x32\x17.pigatron.ChannelConfig')
+  serialized_pb=_b('\n\x13\x43onfigMessage.proto\x12\x03xen\"Q\n\x0e\x43hannelMapping\x12\x13\n\x0bmidiChannel\x18\x01 \x02(\x05\x12\x15\n\rcvChannelFrom\x18\x02 \x02(\x05\x12\x13\n\x0b\x63vChannelTo\x18\x03 \x02(\x05\"<\n\rChannelConfig\x12+\n\x0e\x63hannelMapping\x18\x01 \x03(\x0b\x32\x13.xen.ChannelMapping\":\n\rConfigWrapper\x12)\n\rchannelConfig\x18\x01 \x01(\x0b\x32\x12.xen.ChannelConfig')
 )
 
 
@@ -28,27 +28,27 @@ DESCRIPTOR = _descriptor.FileDescriptor(
 
 _CHANNELMAPPING = _descriptor.Descriptor(
   name='ChannelMapping',
-  full_name='pigatron.ChannelMapping',
+  full_name='xen.ChannelMapping',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='midiChannel', full_name='pigatron.ChannelMapping.midiChannel', index=0,
+      name='midiChannel', full_name='xen.ChannelMapping.midiChannel', index=0,
       number=1, type=5, cpp_type=1, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='cvChannelFrom', full_name='pigatron.ChannelMapping.cvChannelFrom', index=1,
+      name='cvChannelFrom', full_name='xen.ChannelMapping.cvChannelFrom', index=1,
       number=2, type=5, cpp_type=1, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='cvChannelTo', full_name='pigatron.ChannelMapping.cvChannelTo', index=2,
+      name='cvChannelTo', full_name='xen.ChannelMapping.cvChannelTo', index=2,
       number=3, type=5, cpp_type=1, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -66,20 +66,20 @@ _CHANNELMAPPING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=33,
-  serialized_end=114,
+  serialized_start=28,
+  serialized_end=109,
 )
 
 
 _CHANNELCONFIG = _descriptor.Descriptor(
   name='ChannelConfig',
-  full_name='pigatron.ChannelConfig',
+  full_name='xen.ChannelConfig',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='channelMapping', full_name='pigatron.ChannelConfig.channelMapping', index=0,
+      name='channelMapping', full_name='xen.ChannelConfig.channelMapping', index=0,
       number=1, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -97,20 +97,20 @@ _CHANNELCONFIG = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=116,
-  serialized_end=181,
+  serialized_start=111,
+  serialized_end=171,
 )
 
 
-_WRAPPERMESSAGE = _descriptor.Descriptor(
-  name='WrapperMessage',
-  full_name='pigatron.WrapperMessage',
+_CONFIGWRAPPER = _descriptor.Descriptor(
+  name='ConfigWrapper',
+  full_name='xen.ConfigWrapper',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='channelConfig', full_name='pigatron.WrapperMessage.channelConfig', index=0,
+      name='channelConfig', full_name='xen.ConfigWrapper.channelConfig', index=0,
       number=1, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -128,37 +128,37 @@ _WRAPPERMESSAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=183,
-  serialized_end=247,
+  serialized_start=173,
+  serialized_end=231,
 )
 
 _CHANNELCONFIG.fields_by_name['channelMapping'].message_type = _CHANNELMAPPING
-_WRAPPERMESSAGE.fields_by_name['channelConfig'].message_type = _CHANNELCONFIG
+_CONFIGWRAPPER.fields_by_name['channelConfig'].message_type = _CHANNELCONFIG
 DESCRIPTOR.message_types_by_name['ChannelMapping'] = _CHANNELMAPPING
 DESCRIPTOR.message_types_by_name['ChannelConfig'] = _CHANNELCONFIG
-DESCRIPTOR.message_types_by_name['WrapperMessage'] = _WRAPPERMESSAGE
+DESCRIPTOR.message_types_by_name['ConfigWrapper'] = _CONFIGWRAPPER
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 ChannelMapping = _reflection.GeneratedProtocolMessageType('ChannelMapping', (_message.Message,), {
   'DESCRIPTOR' : _CHANNELMAPPING,
   '__module__' : 'ConfigMessage_pb2'
-  # @@protoc_insertion_point(class_scope:pigatron.ChannelMapping)
+  # @@protoc_insertion_point(class_scope:xen.ChannelMapping)
   })
 _sym_db.RegisterMessage(ChannelMapping)
 
 ChannelConfig = _reflection.GeneratedProtocolMessageType('ChannelConfig', (_message.Message,), {
   'DESCRIPTOR' : _CHANNELCONFIG,
   '__module__' : 'ConfigMessage_pb2'
-  # @@protoc_insertion_point(class_scope:pigatron.ChannelConfig)
+  # @@protoc_insertion_point(class_scope:xen.ChannelConfig)
   })
 _sym_db.RegisterMessage(ChannelConfig)
 
-WrapperMessage = _reflection.GeneratedProtocolMessageType('WrapperMessage', (_message.Message,), {
-  'DESCRIPTOR' : _WRAPPERMESSAGE,
+ConfigWrapper = _reflection.GeneratedProtocolMessageType('ConfigWrapper', (_message.Message,), {
+  'DESCRIPTOR' : _CONFIGWRAPPER,
   '__module__' : 'ConfigMessage_pb2'
-  # @@protoc_insertion_point(class_scope:pigatron.WrapperMessage)
+  # @@protoc_insertion_point(class_scope:xen.ConfigWrapper)
   })
-_sym_db.RegisterMessage(WrapperMessage)
+_sym_db.RegisterMessage(ConfigWrapper)
 
 
 # @@protoc_insertion_point(module_scope)
