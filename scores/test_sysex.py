@@ -5,7 +5,10 @@ channelMapping = message.channelConfig.channelMapping.add()
 channelMapping.midiChannel = 0
 channelMapping.cvChannelFrom = 0
 channelMapping.cvChannelTo = 1
-logging.info(message.SerializeToString())
+
+message.scale.cents.extend([100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200]);
+
+
 
 sysex(message.SerializeToString())
 wait(L4)

@@ -2,16 +2,21 @@ syntax = "proto2";
 
 package xen;
 
-message ChannelMapping {
-    required int32 midiChannel = 1;
-    required int32 cvChannelFrom = 2;
-    required int32 cvChannelTo = 3;
+message ConfigWrapper {
+    optional ChannelConfig channelConfig = 1;
+    optional Scale scale = 2;
 }
 
 message ChannelConfig {
     repeated ChannelMapping channelMapping = 1;
 }
 
-message ConfigWrapper {
-    optional ChannelConfig channelConfig = 1;
+message ChannelMapping {
+    required int32 midiChannel = 1;
+    required int32 cvChannelFrom = 2;
+    required int32 cvChannelTo = 3;
+}
+
+message Scale {
+    repeated int32 cents = 1;
 }
